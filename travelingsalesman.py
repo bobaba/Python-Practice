@@ -1,10 +1,15 @@
 from random import randrange
 import math
+
 def create_random_points(numPoints: int, xySize: int) -> list:
   """ Randomly generate a set of points 
   
-  where numPoints = the number of points on salesman's map and xySize = the bounds of the map
-  if 5 is provided for both numPoints and xySize, a 5x5 map will be created and 5 random points chosen
+  Parameters
+  ----------
+  numPoints : int
+    the number of points on salesman's map
+  xySize : int
+    the bounds of the map
   """
   i = 0
   points = []
