@@ -1,8 +1,8 @@
 import random 
-import math
+import distanceHelpers as dh
 
 class GeneticAlgorithm():
-
+  """ supply a set of points and this genetic algorithm will find the fastest route between them """
   def __init__(self, setOfPoints: list, maxEpochs: int, populationSize: int, mutationPercent: float ):
 
     population = self.initialPopulation(populationSize, len(setOfPoints))
@@ -18,6 +18,7 @@ class GeneticAlgorithm():
         epoch += 1
       if epoch % 100 == 0:
         print(f"Epoch={epoch}")
+    # is it worth searching for the fastest route in population?
     self.path = population[0]
 
   def initialPopulation(self, popSize: int, numCities: int) -> list:
@@ -28,17 +29,12 @@ class GeneticAlgorithm():
       population.append([0] + random.sample(randomRoute, len(randomRoute)) )
     return population
 
-  def pythagoreanDistance(self, point1: list, point2: list) -> float:
-    """ a^2 + b^2 = c^2 """
-    a = abs(point1[0] - point2[0])
-    b = abs(point1[1] - point2[1])
-    return math.sqrt(a*a + b*b)
 
   def getDistanceOfRoute(self, route: list, cities: list) -> float:
     """ return the distance traveling the specified route """
     distance = 0
     for i in range(len(route)-1):
-      distance += self.pythagoreanDistance(cities[route[i]], cities[route[i+1]])
+      distance += dh.pythagoreanDistance(cities[route[i]], cities[route[i+1]])
     return distance
 
   def createMatingPool(self, population: list, cities: list) -> list:
@@ -76,6 +72,13 @@ class GeneticAlgorithm():
             child[j] = a 
             stop = True
     return child 
+  
+  # def mutate(self, child: list) -> list:
+  #   """ reorder child to add diversity into gene pool """
+  #   mutant = child  
+  #   i = mutant.pop(random.randrange(1,len(child)))
+  #   mutant.append(i)
+  #   return mutant
 
   def evolve(self, matingPool: list, mutationPercent: float, populationSize: int) -> list:
     """ create a new generation by pulling from matingPool and mating """
@@ -87,7 +90,7 @@ class GeneticAlgorithm():
       child = self.mate(parent1, parent2)
       # oddsOfMutation = random.randrange(100)
       # if oddsOfMutation <= mutationPercent*100:
-      #   child = mutate(child)
+      #   child = self.mutate(child)
       evolution.append(child)
     return evolution 
 
