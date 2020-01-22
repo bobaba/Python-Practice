@@ -12,7 +12,7 @@ class PlotRoute():
     ys = [cities[i][1] for i in route]
 
     fig, ax = plt.subplots()
-    ax.plot(xs, ys)
+    ax.plot(xs, ys, marker="D")
     if xLabel != None:
       ax.set_xlabel(f"{xLabel}", fontsize=15)
     if yLabel != None: 

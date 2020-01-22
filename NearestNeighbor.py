@@ -4,11 +4,11 @@ class NearestNeighbor():
   """ Approximate the shortest journey between provided points
 
   this greedy algorithm searches for the next closest point from where it is standing\n
-  without going backwards
+  without going
 
     """
-  def __init__(self, setOfPoints):
-    self.dimension = len(setOfPoints[0])
+  def __init__(self, setOfPoints, dimensions = 2):
+    self.dimension = dimensions
     self.setOfPoints = setOfPoints 
     self.path = self.runAlgorithm()
     self.optimized = self.optimize_path()
@@ -22,7 +22,7 @@ class NearestNeighbor():
         if self.setOfPoints.index(point) in route: 
           continue 
         else: 
-          currDistance = dh.pythagoreanDistance(self.setOfPoints[route[-1]], point)
+          currDistance = dh.pythagoreanDistance(self.setOfPoints[route[-1]], point, self.dimension)
           if currDistance < closestDistance: 
             closestDistance = currDistance 
             closestIndex = self.setOfPoints.index(point)

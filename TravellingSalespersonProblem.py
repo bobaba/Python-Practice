@@ -18,3 +18,4 @@ pm.PlotRoute(setOfPoints, ga.path, "Genetic Algorithm", dh.getDistanceOfRoute(ga
 # Nearest Neighbor Algorithm
 nn = NearestNeighbor(setOfPoints) 
 pm.PlotRoute(setOfPoints, nn.path, "Nearest Neighbor", dh.getDistanceOfRoute(nn.path, setOfPoints) )
+
